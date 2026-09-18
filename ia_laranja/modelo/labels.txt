@@ -1,0 +1,7 @@
+0 Saudável
+1 Greening
+2 Zinco
+3 Cancro Cítrico
+4 Mancha Leprose
+5 Lagarta dos Cítros
+6 Larva Minadora
