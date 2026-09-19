@@ -489,6 +489,38 @@ def inicio():
 @app.route("/analisar_imagem", methods=["POST"])
 def analisar_imagem():
 
+    try:
+        arquivo = request.files.get("imagem")
+
+        if not arquivo:
+            return render_template_string(
+                HTML,
+                resultado_imagem="Nenhuma imagem foi enviada.",
+                confianca_imagem=None
+            )
+
+        imagem = Image.open(
+            io.BytesIO(arquivo.read())
+        )
+
+        resultado, confianca = analisar(imagem)
+
+        return render_template_string(
+            HTML,
+            resultado_imagem=resultado,
+            confianca_imagem=f"{confianca:.2f}"
+        )
+
+    except Exception as erro:
+        print("ERRO AO ANALISAR IMAGEM:", erro)
+
+        return render_template_string(
+            HTML,
+            resultado_imagem="Erro ao analisar a imagem.",
+            confianca_imagem=None
+        )
+def analisar_imagem():
+
     resultado = None
     confianca = None
 
